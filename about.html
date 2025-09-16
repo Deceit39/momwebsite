@@ -55,20 +55,3 @@
 </body>
 
 </html>
-      const nav = document.querySelector('header nav');
-      function toggle() {
-        hamb.classList.toggle('active');
-        nav.classList.toggle('active');
-        const expanded = hamb.getAttribute('aria-expanded') === 'true';
-        hamb.setAttribute('aria-expanded', String(!expanded));
-      }
-      if (hamb && nav) {
-        hamb.addEventListener('click', toggle);
-        hamb.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggle(); } });
-      }
-    })();
-  </script>
-  <script src="js/script.js"></script>
-</body>
-
-</html>
