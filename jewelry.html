@@ -13,17 +13,17 @@
 
   <header>
     <img src="images/logo.svg" class="logo" alt="Isabel's Studio Logo">
-    <div class="hamburger">
+    <div class="hamburger" role="button" aria-label="Toggle navigation" aria-expanded="false" tabindex="0">
       <div></div>
       <div></div>
       <div></div>
     </div>
-    <nav>
+    <nav aria-label="Main navigation">
       <ul>
         <li><a href="index.html">Home</a></li>
         <li><a href="about.html">About</a></li>
         <li><a href="crafts.html">Crafts</a></li>
-        <li><a href="jewelry.html">Jewelry</a></li>
+        <li><a href="jewelry.html" class="active">Jewelry</a></li>
         <li><a href="contact.html">Contact</a></li>
       </ul>
     </nav>
@@ -56,12 +56,28 @@
       <p>&copy; 2025 Isabel's Studio. All rights reserved.</p>
       <p>Follow us on social media for the latest updates!</p>
       <ul class="social-media">
-        <li><a href="https://facebook.com" target="_blank" aria-label="Facebook"><svg width="24" height="24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M22 12c0-5.522-4.477-10-10-10S2 6.478 2 12c0 4.991 3.657 9.128 8.438 9.877v-6.987h-2.54v-2.89h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.242 0-1.632.771-1.632 1.562v1.875h2.773l-.443 2.89h-2.33v6.987C18.343 21.128 22 16.991 22 12z" fill="currentColor"/></svg></a></li>
+        <li><a href="https://facebook.com" target="_blank" aria-label="Facebook"><svg width="24" height="24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M22 12c0-5.522-4.477-10-10-10S2 6.478 2 12c0 4.991 3.657 9.128 8.438 9.877v-6.987h-2.54v-2.89h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.242 0-1.632.771-1.632 1.562v1.875h2.773l-.443 2.89h-2.33v6.987C18.343 21.128 22 16.991 22 12z" fill="currentColor"/></a></li>
         <li><a href="https://instagram.com" target="_blank" aria-label="Instagram"><svg width="24" height="24" fill="none" xmlns="http://www.w3.org/2000/svg"><rect width="20" height="20" x="2" y="2" rx="5" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="5" stroke="currentColor" stroke-width="2"/><circle cx="17" cy="7" r="1.5" fill="currentColor"/></svg></a></li>
         <li><a href="https://twitter.com" target="_blank" aria-label="Twitter"><svg width="24" height="24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M22 5.924c-.793.352-1.645.59-2.54.698a4.48 4.48 0 0 0 1.965-2.475 8.94 8.94 0 0 1-2.828 1.082A4.48 4.48 0 0 0 11.07 9.03a12.72 12.72 0 0 1-9.24-4.685s-2.28 4.13 2.86 6.13c-.7.19-1.44.23-2.18.09.61 1.91 2.37 3.3 4.46 3.34A8.98 8.98 0 0 1 2 18.077c5.29 3.39 11.54 1.48 14.5-3.31 1.13-1.81 1.77-3.91 1.77-6.06 0-.09 0-.18-.01-.27A6.7 6.7 0 0 0 22 5.924z" fill="currentColor"/></svg></a></li>
       </ul> 
   </footer>
+  <script src="js/script.js"></script>
+</body>
 
+</html>
+      const nav = document.querySelector('header nav');
+      function toggle() {
+        hamb.classList.toggle('active');
+        nav.classList.toggle('active');
+        const expanded = hamb.getAttribute('aria-expanded') === 'true';
+        hamb.setAttribute('aria-expanded', String(!expanded));
+      }
+      if (hamb && nav) {
+        hamb.addEventListener('click', toggle);
+        hamb.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggle(); } });
+      }
+    })();
+  </script>
   <script src="js/script.js"></script>
 </body>
 

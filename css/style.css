@@ -22,8 +22,28 @@ body {
 h1, h2, h3 {
     font-family: 'Playfair Display', serif;
     color: #223A5E;
-    margin-bottom: 0.5em;
+    margin: 1.5em 0;
     font-weight: 700;
+    text-align: center;
+}
+
+.page-title {
+    font-size: 2.5rem;
+    margin-bottom: 1em;
+    position: relative;
+    padding-bottom: 0.5em;
+}
+
+.page-title::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 3px;
+    background-color: #4F8EF7;
+    border-radius: 2px;
 }
 
 p {
@@ -52,7 +72,10 @@ header {
     padding: 1.5em 0;
     text-align: center;
     box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-    position: relative;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    transition: padding 0.3s ease;
 }
 
 header .logo {
@@ -109,36 +132,50 @@ nav a.active {
 /* --- Main Content --- */
 main {
     max-width: 1100px;
-    margin: 4em auto;
+    margin: 2em auto 4em;
     padding: 0 2em;
 }
 
-.page-title {
-    text-align: center;
-    font-size: 2.8rem;
-    margin-bottom: 1em;
+/* Add a constrained hero image class so homepage image isn't full width */
+.hero-image {
+    display: block;
+    max-width: 700px;
+    width: 100%;
+    margin: 0 auto 2em;
+    border-radius: 12px;
 }
 
 /* --- Gallery for Crafts/Jewelry Pages --- */
 .gallery {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 2em;
-    margin-bottom: 3em;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2.5em;
+    margin: 3em 0;
 }
 
 .gallery-item {
-    background: #FFFFFF;
-    padding: 1em;
-    border-radius: 8px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.07);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     text-align: center;
+    background: #FFFFFF;
+    padding: 1.5em;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.07);
+    transition: transform 0.3s ease;
+}
+
+.gallery-item:hover {
+    transform: translateY(-5px);
 }
 
 .gallery-item img {
     margin-bottom: 1em;
     aspect-ratio: 1 / 1;
     object-fit: cover;
+    /* constrain gallery thumbnails */
+    max-height: 220px;
+    width: 100%;
 }
 
 .gallery-item h3 {
@@ -153,12 +190,17 @@ main {
     gap: 3em;
     align-items: center;
     margin-bottom: 3em;
+    max-width: 900px;
+    margin: 0 auto;
+    text-align: center;
 }
 .about-section img {
     flex-shrink: 0;
     width: 40%;
     object-fit: cover;
     aspect-ratio: 4 / 5;
+    max-width: 400px;
+    margin: 0 auto 2em;
 }
 
 /* --- Contact Page --- */
@@ -168,6 +210,90 @@ main {
     padding: 2em;
     border-radius: 8px;
     margin-bottom: 2em;
+}
+
+/* make contact image smaller and centered */
+.contact-info img {
+    width: 180px;
+    max-width: 45%;
+    height: auto;
+    display: block;
+    margin: 0 auto 1rem;
+    border-radius: 8px;
+}
+
+/* Contact Form Styles */
+.contact-form {
+    max-width: 600px;
+    margin: 2em auto;
+    padding: 2em;
+    background: #FFFFFF;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.07);
+}
+
+.form-group {
+    margin-bottom: 1.8em;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.7em;
+    color: #223A5E;
+    font-weight: 500;
+    font-size: 0.95rem;
+    letter-spacing: 0.5px;
+}
+
+.form-group input,
+.form-group textarea {
+    width: 100%;
+    padding: 1em;
+    border: 2px solid #D6E6FA;
+    border-radius: 8px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1rem;
+    color: #223A5E;
+    background-color: #F0F6FF;
+    transition: all 0.3s ease;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: #4F8EF7;
+    background-color: #FFFFFF;
+    box-shadow: 0 0 0 4px rgba(79,142,247,0.1);
+}
+
+.form-group textarea {
+    min-height: 120px;
+    resize: vertical;
+}
+
+.submit-btn {
+    background-color: #4F8EF7;
+    color: white;
+    padding: 1em 2em;
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 1rem;
+    letter-spacing: 0.5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    width: 100%;
+    text-transform: uppercase;
+}
+
+.submit-btn:hover {
+    background-color: #223A5E;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(34,58,94,0.15);
+}
+
+.submit-btn:active {
+    transform: translateY(0);
 }
 
 /* --- Footer --- */
@@ -221,6 +347,12 @@ footer .social-media svg {
         width: 20px;
         height: 20px;
     }
+}
+
+/* Accessibility: visible focus for keyboard users */
+nav a:focus {
+    outline: 3px solid rgba(79,142,247,0.25);
+    outline-offset: 3px;
 }
 
 /* --- Animations --- */
@@ -288,12 +420,16 @@ main, .page-title, .about-section, .contact-info {
     }
     .gallery {
         grid-template-columns: 1fr;
+        gap: 1.25em;
     }
     nav ul {
         gap: 1em;
     }
     .page-title {
         font-size: 2rem;
+    }
+    .page-title::after {
+        width: 60px;
     }
 }
 
@@ -302,7 +438,7 @@ main, .page-title, .about-section, .contact-info {
         display: block;
     }
     header {
-        padding: 1em 0;
+        padding: 0.5em 0;
     }
     header .logo {
         margin: 0 auto;
@@ -310,8 +446,8 @@ main, .page-title, .about-section, .contact-info {
     }
     nav ul {
         display: none;
-        position: absolute;
-        top: 100%;
+        position: fixed;
+        top: 60px; /* Adjust based on mobile header height */
         left: 0;
         width: 100%;
         background-color: #FFFFFF;
@@ -319,6 +455,8 @@ main, .page-title, .about-section, .contact-info {
         gap: 0;
         padding: 1em 0;
         box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        max-height: calc(100vh - 60px);
+        overflow-y: auto;
     }
     nav.active ul {
         display: flex;
@@ -339,11 +477,11 @@ main, .page-title, .about-section, .contact-info {
         background-color: #F0F6FF;
     }
     main {
-        padding: 0 0.5em;
-        margin: 2em auto;
+        padding: 0 1em;
     }
     .page-title {
-        font-size: 1.5rem;
+        font-size: 1.75rem;
+        margin-bottom: 0.75em;
     }
     .gallery-item {
         padding: 0.5em;
